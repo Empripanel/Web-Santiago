@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VÓRTICE — Estudio digital</title>
+<title>Santiago Perez Junqueira</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -86,50 +86,75 @@
   /* ---------- nav ---------- */
 
   .avatar-menu{ position:fixed; top:1.8rem; left:2.4rem; z-index:25; }
-  .avatar-btn{
-    width:44px; height:44px; border-radius:50%;
-    padding:0; cursor:pointer; display:block; overflow:hidden;
-    border:2px solid var(--glass-border);
-    background:linear-gradient(135deg, var(--violet-1), var(--accent));
-    box-shadow:0 0 0 0 rgba(168,85,247,0);
-    transition:box-shadow .3s ease, border-color .3s ease, transform .3s ease;
-  }
-  .avatar-btn img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .avatar-btn:hover, .avatar-btn:focus-visible{
-    border-color:var(--violet-2); transform:scale(1.06);
-    box-shadow:0 0 22px 3px rgba(168,85,247,.6);
-  }
-  .avatar-socials{
-    position:absolute; top:50%; left:calc(100% + .7rem);
-    display:flex; flex-direction:row; align-items:center; gap:.55rem;
-    background:rgba(20,10,42,.55);
-    border:1px solid var(--glass-border);
-    border-radius:18px;
-    padding:.6rem;
-    backdrop-filter:blur(18px) saturate(160%);
-    -webkit-backdrop-filter:blur(18px) saturate(160%);
-    box-shadow:0 14px 50px -12px rgba(124,58,237,.55);
-    opacity:0; visibility:hidden; transform:translateY(-50%) translateX(-6px);
-    transition:opacity .25s ease, transform .25s ease, visibility .25s;
-  }
-  .avatar-menu:hover .avatar-socials,
-  .avatar-menu.open .avatar-socials{
-    opacity:1; visibility:visible; transform:translateY(-50%) translateX(0);
-  }
-  .avatar-socials a{
-    width:36px; height:36px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center;
-    color:var(--text);
-    background:rgba(255,255,255,.05);
-    border:1px solid var(--glass-border);
-    transition:background .25s ease, color .25s ease, transform .25s ease;
-  }
-  .avatar-socials a:hover{
-    background:linear-gradient(135deg, var(--violet-2), var(--accent));
-    transform:scale(1.08); color:#fff;
-  }
-  .avatar-socials svg{ width:17px; height:17px; }
 
+.avatar-btn{
+  width:44px; height:44px; border-radius:50%;
+  padding:0; cursor:pointer; display:block; overflow:hidden;
+  border:2px solid var(--glass-border);
+  background:linear-gradient(135deg, var(--violet-1), var(--accent));
+  box-shadow:0 0 0 0 rgba(168,85,247,0);
+  transition:box-shadow .3s ease, border-color .3s ease, transform .3s ease;
+}
+
+.avatar-btn img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.avatar-btn:hover, .avatar-btn:focus-visible{
+  border-color:var(--violet-2); transform:scale(1.06);
+  box-shadow:0 0 22px 3px rgba(168,85,247,.6);
+}
+
+.avatar-socials{
+  position:absolute; top:50%; left:calc(100% + .7rem);
+  /* Fuerzo la disposición en fila y evito que colapse en columna */
+  display:flex !important; 
+  flex-direction:row !important; 
+  flex-wrap:nowrap !important; /* Prohíbe saltos de línea */
+  align-items:center; 
+  gap:.55rem;
+  background:rgba(20,10,42,.55);
+  border:1px solid var(--glass-border);
+  border-radius:18px;
+  padding:.6rem;
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 14px 50px -12px rgba(124,58,237,.55);
+  opacity:0; visibility:hidden; 
+  transform:translateY(-50%) translateX(-6px);
+  transition:opacity .25s ease, transform .25s ease, visibility .25s;
+  width:max-content; /* Obliga al contenedor a tomar el ancho de los 4 íconos en horizontal */
+}
+
+.avatar-menu:hover .avatar-socials,
+.avatar-menu.open .avatar-socials{
+  opacity:1; visibility:visible; 
+  transform:translateY(-50%) translateX(0);
+}
+
+.avatar-socials a{
+  width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:var(--text);
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--glass-border);
+  transition:background .25s ease, color .25s ease, transform .25s ease;
+  flex-shrink:0 !important; /* Impide que los íconos se achiquen o rompan el layout horizontal */
+}
+
+.avatar-socials a:hover{
+  background:linear-gradient(135deg, var(--violet-2), var(--accent));
+  transform:scale(1.08); color:#fff;
+}
+
+.avatar-socials svg{ width:17px; height:17px; }
+
+/* REGLA MÓVIL: Ajuste de posición si el marco del celular aprieta el menú */
+@media (max-width: 640px){
+  .avatar-menu { top: 1.2rem; left: 1.2rem; }
+  .avatar-socials { padding: .45rem; gap: .4rem; }
+  .avatar-socials a { width: 32px; height: 32px; }
+  .avatar-socials svg { width: 15px; height: 15px; }
+}
+  
   .cta-fixed{
     position:fixed; top:2.05rem; right:2.4rem; z-index:20;
     font-family:'JetBrains Mono', monospace; font-size:.75rem; letter-spacing:.05em;
@@ -650,6 +675,8 @@
     .ghost-num, .floating-chip{ transform:translate(-50%,-50%) !important; opacity:.4 !important; }
   }
 </style>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
 
@@ -663,24 +690,38 @@
 
 <div class="avatar-menu" id="avatarMenu">
   <button class="avatar-btn" id="avatarBtn" aria-haspopup="true" aria-expanded="false" aria-label="Redes sociales">
-    <img src="TU-FOTO-DE-PERFIL.jpg" alt="Foto de perfil">
+    <img src="fotoperfilsantiago.jpeg" alt="Foto de perfil">
   </button>
   <div class="avatar-socials" id="avatarSocials">
-    <a href="https://instagram.com/tu_usuario" target="_blank" rel="noopener" aria-label="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
-    </a>
-    <a href="https://youtube.com/@tu_usuario" target="_blank" rel="noopener" aria-label="YouTube">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.3 9.1v5.8l5.2-2.9-5.2-2.9Z" fill="currentColor" stroke="none"/></svg>
-    </a>
-    <a href="https://facebook.com/tu_usuario" target="_blank" rel="noopener" aria-label="Facebook">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M14 8.3h-1.5c-.7 0-1.2.5-1.2 1.2V11h2.5l-.3 2.2h-2.2V19h-2.3v-5.8H9.9V11h1.1V9.2c0-1.7 1.2-3 2.9-3H14v2.1Z" fill="currentColor" stroke="none"/></svg>
-    </a>
-    <a href="https://tiktok.com/@tu_usuario" target="_blank" rel="noopener" aria-label="TikTok">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.2 3.5v11.3a3.3 3.3 0 1 1-2.4-3.2"/><path d="M13.2 3.5c.3 2.3 2.1 4 4.3 4.3"/></svg>
-    </a>
-  </div>
+  <a href="https://www.instagram.com/santiagoperezjunqueira?igsi=MXJzM2ZpaHYzNzF3NA%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+    </svg>
+  </a>
+
+  <a href="https://youtube.com/@santiagoperezjunqueira?si=Nsi2wkwmXGlrwRev" target="_blank" rel="noopener" aria-label="YouTube">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+      <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+    </svg>
+  </a>
+
+  <a href="https://www.facebook.com/share/1FJXA1kMj4/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+    </svg>
+  </a>
+
+  <a href="https://www.tiktok.com/@santiagoperezjunqueira?_r=1&_t=ZS-99P0dp5btNQ" target="_blank" rel="noopener" aria-label="TikTok">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+    </svg>
+  </a>
 </div>
-<a class="cta-fixed" href="#final">Escribime →</a>
+</div>
+<a class="cta-fixed" href="#faq">Escribime →</a>
 
 <nav class="rail" aria-label="Navegación de secciones">
   <button data-target="hero" aria-label="Inicio" class="active"></button>
@@ -697,7 +738,7 @@
     <div class="scene-sticky">
       <div class="halo halo-hero" aria-hidden="true"></div>
       <div class="scene-content">
-        <p class="eyebrow chip"></p>
+        <p class="eyebrow chip">Santiago Perez Junqueira</p>
         <div class="tech-line" aria-hidden="true"></div>
         <h1 class="shimmer">Tu marca,<br>en foco absoluto.</h1>
         <p></p>
@@ -716,16 +757,16 @@
     <div class="scene-sticky">
       <span class="ghost-num" aria-hidden="true">01</span>
 
-      <span class="floating-chip" data-tx="-13" data-ty="-42" data-rot="-8" data-tx-m="-24" data-ty-m="-32" data-rot-m="-8">Diseño a medida</span>
-      <span class="floating-chip" data-tx="14" data-ty="-40" data-rot="7" data-tx-m="24" data-ty-m="-35" data-rot-m="7">Carga rápida</span>
-      <span class="floating-chip" data-tx="-14" data-ty="41" data-rot="7" data-tx-m="-24" data-ty-m="35" data-rot-m="7">100% responsive</span>
-      <span class="floating-chip" data-tx="13" data-ty="43" data-rot="-7" data-tx-m="24" data-ty-m="32" data-rot-m="-7">Pensado para convertir</span>
+      <span class="floating-chip" data-tx="-13" data-ty="-42" data-rot="-8" data-tx-m="-24" data-ty-m="-32" data-rot-m="-8">Diseño a Medida</span>
+      <span class="floating-chip" data-tx="14" data-ty="-40" data-rot="7" data-tx-m="24" data-ty-m="-35" data-rot-m="7">Carga Rápida</span>
+      <span class="floating-chip" data-tx="-14" data-ty="41" data-rot="7" data-tx-m="-24" data-ty-m="35" data-rot-m="7">100% Responsive</span>
+      <span class="floating-chip" data-tx="13" data-ty="43" data-rot="-7" data-tx-m="24" data-ty-m="32" data-rot-m="-7">Pensado para Vender</span>
 
       <div class="scene-content">
         <p class="eyebrow chip">Sitios web</p>
         <h2>El sitio <span class="word-highlight">web</span> es la fuente.</h2>
         <div class="text-panel">
-          <p>Cada proyecto arranca acá: la pieza que sostiene todo lo demás, sin plantillas y lista para convertir visitas en clientes reales.</p>
+          <p>Cada proyecto arranca acá: la pieza que sostiene todo lo demás, tu carta de presentacion digital y lista para convertir visitas en clientes reales.</p>
         </div>
       </div>
     </div>
@@ -744,7 +785,7 @@
         <p class="eyebrow chip">Redes sociales</p>
         <h2>El contenido en <span class="word-highlight">redes</span> sostiene el pulso.</h2>
         <div class="text-panel">
-          <p>Una marca no vive solo en su web: vive en el scroll diario. Publicaciones con identidad consistente que la mantienen presente entre visita y visita.</p>
+          <p>Ninguna marca es muy recordada: por eso la tuya tiene que aparecer todo el tiempo en el scroll diario de la gente.</p>
         </div>
       </div>
     </div>
@@ -756,14 +797,14 @@
 
       <span class="floating-chip" data-tx="-13" data-ty="-43" data-rot="-7" data-tx-m="-24" data-ty-m="-32" data-rot-m="-7">Meta Ads</span>
       <span class="floating-chip" data-tx="14" data-ty="-40" data-rot="8" data-tx-m="24" data-ty-m="-35" data-rot-m="8">Google Ads</span>
-      <span class="floating-chip" data-tx="-14" data-ty="42" data-rot="8" data-tx-m="-24" data-ty-m="35" data-rot-m="8">Segmentación fina</span>
-      <span class="floating-chip" data-tx="13" data-ty="40" data-rot="-8" data-tx-m="24" data-ty-m="32" data-rot-m="-8">Optimización continua</span>
+      <span class="floating-chip" data-tx="-14" data-ty="42" data-rot="8" data-tx-m="-24" data-ty-m="35" data-rot-m="8">Segmentación Fina</span>
+      <span class="floating-chip" data-tx="13" data-ty="40" data-rot="-8" data-tx-m="24" data-ty-m="32" data-rot-m="-8">Optimización Diaria</span>
 
       <div class="scene-content">
         <p class="eyebrow chip">Meta Ads + Google Ads</p>
         <h2>La <span class="word-highlight">pauta</span> multiplica el alcance.</h2>
         <div class="text-panel">
-          <p>Sitio y contenido listos, la pauta lleva la marca frente a quien todavía no la conoce. Campañas medidas por datos reales, no por corazonadas.</p>
+          <p>Web y contenido listos, la pauta lleva la marca frente a quien todavía no la conoce y califica como un potencial cliente.</p>
         </div>
       </div>
     </div>
@@ -773,7 +814,7 @@
     <div class="scene-sticky">
       <div class="halo halo-pipeline" aria-hidden="true"></div>
       <div class="scene-content">
-        <h2>Un solo estudio. Un solo sistema.</h2>
+        <h2>Un solo <span class="word-highlight">estudio.</span> Un solo <span class="word-highlight">sistema.</span></h2>
         <div class="stage-row">
           <div class="stage-item"><span class="stage-chip">01</span><span class="stage-label">Sitio</span></div>
           <div class="stage-line"></div>
@@ -841,10 +882,10 @@
         <p class="eyebrow chip" style="justify-content:center;">Empecemos</p>
         <h2 class="shimmer">¿Arrancamos<br>tu proyecto?</h2>
         <div class="text-panel" style="margin:1.4rem auto 2rem;">
-          <p>Contame de tu marca y armamos juntos qué combinación de sitio, contenido y pauta le hace mejor.</p>
+          <p>Contame de tu marca y armamos juntos una propuesta que se ajuste a lo que estas buscando.</p>
         </div>
         <br>
-        <a class="final-btn" href="mailto:hola@vortice.studio">hola@vortice.studio →</a>
+        <a class="final-btn" href="mailto:perezjunqueirasantiago@gmail.com">perezjunqueirasantiago@gmail.com →</a>
       </div>
     </div>
   </section>
@@ -862,7 +903,7 @@
         <span class="faq-icon">+</span>
       </button>
       <div class="faq-a">
-        <p>Podés contratar un servicio individual (como solo la Web) o el sistema completo de Sitio + Redes + Pauta. Diseñamos cada etapa para que funcione sola o potenciada en conjunto.</p>
+        <p>Podés contratar un servicio individual (como solo la Web), dos servicios (combo Web y Redes) o el sistema completo de Sitio + Redes + Pauta. Diseñamos cada etapa para que funcione sola o potenciada en conjunto.</p>
       </div>
     </div>
     <div class="faq-item">
@@ -895,15 +936,15 @@
   </div>
 
   <p class="whatsapp-sub">¿Preferís hablarlo directo?</p>
-  <a class="whatsapp-btn" href="https://wa.me/5491100000000" target="_blank" rel="noopener">
+  <a class="whatsapp-btn" href="https://wa.me/5491131823825" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2Zm0 18.06h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.32a8.16 8.16 0 0 1-1.26-4.33c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.25-8.25 8.25Zm4.52-6.18c-.25-.12-1.46-.72-1.68-.8-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.96-.14.16-.29.18-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.24-.87.85-.87 2.08 0 1.22.89 2.4 1.02 2.57.12.16 1.75 2.67 4.24 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.46-.6 1.67-1.17.2-.58.2-1.07.14-1.17-.06-.1-.23-.16-.48-.28Z"/></svg>
     <span>Escribime por WhatsApp</span>
   </a>
 </section>
 
 <footer>
-  <span>© 2026 Vórtice Estudio Digital</span>
-  <span><a href="mailto:hola@vortice.studio">hola@vortice.studio</a></span>
+  <span>© 2026 Santiago Perez Junqueira</span>
+  <span><a href="mailto:perezjunqueirasantiago@gmail.com">perezjunqueirasantiago@gmail.com</a></span>
 </footer>
 
 <script>

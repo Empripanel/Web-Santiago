@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <!-- Resplandor de Neón Violeta Profundo -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur1"/>
+      <feGaussianBlur stdDeviation="10" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Gradiente Violeta / Neón -->
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d8b4fe" />
+      <stop offset="50%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#7c3aed" />
+    </linearGradient>
+  </defs>
+
+  <!-- Capa 1: Contorno Exterior con Brillo (Glow) -->
+  <path d="M 70 24 
+           C 25 24, 25 48, 50 48 
+           C 75 48, 75 76, 30 76" 
+        fill="none" 
+        stroke="url(#neonGradient)" 
+        stroke-width="8" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        filter="url(#neonGlow)" />
+
+  <!-- Capa 2: Núcleo de Luz Blanco (Efecto Tubo de Neón) -->
+  <path d="M 70 24 
+           C 25 24, 25 48, 50 48 
+           C 75 48, 75 76, 30 76" 
+        fill="none" 
+        stroke="#ffffff" 
+        stroke-width="2.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+        opacity="0.9" />
+</svg>
