@@ -625,11 +625,22 @@
     .avatar-socials{
       flex-wrap:wrap;
       max-width:calc(100vw - 170px);
-      gap:.4rem;
-      padding:.45rem;
+      gap:.35rem;
+      padding:.4rem;
     }
-    .avatar-socials a{ width:30px; height:30px; }
-    .avatar-socials svg{ width:14px; height:14px; }
+    .avatar-socials a{ width:26px; height:26px; }
+    .avatar-socials svg{ width:13px; height:13px; }
+  }
+
+  @media (max-width: 767px){
+    /* Optimización mobile: fondo estático, sin efectos ambientales.
+       Se conserva únicamente el punto que recorre las barras de pulso
+       (.tech-line::after, .stage-line::after) y el .scroll-cue. */
+    .shimmer{ animation:none !important; background-position:0% 50% !important; }
+    .halo{ animation:none !important; }
+    .blob{ animation:none !important; }
+    .final-btn{ animation:none !important; }
+    .stage-chip{ animation:none !important; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -693,7 +704,7 @@
         <p>Diseño de sitios, contenido para redes y campañas de pauta, construidos como un solo sistema — no como tres servicios sueltos.</p>
       </div>
       <div class="hero-photo" aria-hidden="true">
-        <img src="fotoperfilsantiago.jpeg" width="90%" height="90%">
+        <span>Tu foto acá</span>
       </div>
       <div class="scroll-cue" id="scrollCue">
         <span>Scrolleá</span>
@@ -706,10 +717,10 @@
     <div class="scene-sticky">
       <span class="ghost-num" aria-hidden="true">01</span>
 
-      <span class="floating-chip" data-tx="-13" data-ty="-42" data-rot="-8" data-tx-m="-24" data-ty-m="-20" data-rot-m="-8">Diseño a medida</span>
+      <span class="floating-chip" data-tx="-13" data-ty="-42" data-rot="-8" data-tx-m="-24" data-ty-m="-32" data-rot-m="-8">Diseño a medida</span>
       <span class="floating-chip" data-tx="14" data-ty="-40" data-rot="7" data-tx-m="24" data-ty-m="-35" data-rot-m="7">Carga rápida</span>
       <span class="floating-chip" data-tx="-14" data-ty="41" data-rot="7" data-tx-m="-24" data-ty-m="35" data-rot-m="7">100% responsive</span>
-      <span class="floating-chip" data-tx="13" data-ty="43" data-rot="-7" data-tx-m="24" data-ty-m="20" data-rot-m="-7">Pensado para convertir</span>
+      <span class="floating-chip" data-tx="13" data-ty="43" data-rot="-7" data-tx-m="24" data-ty-m="32" data-rot-m="-7">Pensado para convertir</span>
 
       <div class="scene-content">
         <p class="eyebrow chip">Sitios web</p>
@@ -725,10 +736,10 @@
     <div class="scene-sticky">
       <span class="ghost-num" aria-hidden="true">02</span>
 
-      <span class="floating-chip" data-tx="-14" data-ty="-41" data-rot="8" data-tx-m="-24" data-ty-m="-20" data-rot-m="8">Calendario editorial</span>
+      <span class="floating-chip" data-tx="-14" data-ty="-41" data-rot="8" data-tx-m="-24" data-ty-m="-32" data-rot-m="8">Calendario editorial</span>
       <span class="floating-chip" data-tx="13" data-ty="-43" data-rot="-6" data-tx-m="24" data-ty-m="-35" data-rot-m="-6">Identidad extendida</span>
       <span class="floating-chip" data-tx="-13" data-ty="40" data-rot="-7" data-tx-m="-24" data-ty-m="35" data-rot-m="-7">Contenido que retiene</span>
-      <span class="floating-chip" data-tx="14" data-ty="42" data-rot="7" data-tx-m="24" data-ty-m="20" data-rot-m="7">Presencia constante</span>
+      <span class="floating-chip" data-tx="14" data-ty="42" data-rot="7" data-tx-m="24" data-ty-m="32" data-rot-m="7">Presencia constante</span>
 
       <div class="scene-content">
         <p class="eyebrow chip">Redes sociales</p>
@@ -744,10 +755,10 @@
     <div class="scene-sticky">
       <span class="ghost-num" aria-hidden="true">03</span>
 
-      <span class="floating-chip" data-tx="-13" data-ty="-43" data-rot="-7" data-tx-m="-24" data-ty-m="-20" data-rot-m="-7">Meta Ads</span>
+      <span class="floating-chip" data-tx="-13" data-ty="-43" data-rot="-7" data-tx-m="-24" data-ty-m="-32" data-rot-m="-7">Meta Ads</span>
       <span class="floating-chip" data-tx="14" data-ty="-40" data-rot="8" data-tx-m="24" data-ty-m="-35" data-rot-m="8">Google Ads</span>
       <span class="floating-chip" data-tx="-14" data-ty="42" data-rot="8" data-tx-m="-24" data-ty-m="35" data-rot-m="8">Segmentación fina</span>
-      <span class="floating-chip" data-tx="13" data-ty="40" data-rot="-8" data-tx-m="24" data-ty-m="20" data-rot-m="-8">Optimización continua</span>
+      <span class="floating-chip" data-tx="13" data-ty="40" data-rot="-8" data-tx-m="24" data-ty-m="32" data-rot-m="-8">Optimización continua</span>
 
       <div class="scene-content">
         <p class="eyebrow chip">Meta Ads + Google Ads</p>
@@ -986,9 +997,11 @@
 
   function buildBlobs(){
     blobLayer.innerHTML = '';
+    const mobile = isMobileViewport();
     trackHeight = Math.max(document.body.scrollHeight * 0.55, 2200);
     blobLayer.style.height = trackHeight + 'px';
-    for(let i=0;i<blobCount;i++){
+    const count = mobile ? 9 : blobCount;
+    for(let i=0;i<count;i++){
       const el = document.createElement('div');
       el.className = 'blob';
       const size = 160 + Math.random()*360;
@@ -998,7 +1011,9 @@
       el.style.top = (Math.random()*trackHeight)+'px';
       el.style.background = `radial-gradient(circle at 35% 35%, ${palette[i%palette.length]}, transparent 70%)`;
       el.style.opacity = (0.35 + Math.random()*0.45).toFixed(2);
-      el.style.animation = `${driftAnims[i%driftAnims.length]} ${10+Math.random()*10}s ease-in-out infinite`;
+      if(!mobile){
+        el.style.animation = `${driftAnims[i%driftAnims.length]} ${10+Math.random()*10}s ease-in-out infinite`;
+      }
       blobLayer.appendChild(el);
     }
   }
@@ -1017,7 +1032,9 @@
 
     const parallaxY = -y*0.42;
     const sway = Math.sin(y*0.0007)*30;
-    blobLayer.style.transform = `translate(${sway}px, ${parallaxY}px)`;
+    if(!isMobileViewport()){
+      blobLayer.style.transform = `translate(${sway}px, ${parallaxY}px)`;
+    }
 
     const vh = window.innerHeight, vw = window.innerWidth;
     let activeId = null;
