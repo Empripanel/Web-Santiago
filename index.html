@@ -83,6 +83,18 @@
     background:radial-gradient(ellipse at center, transparent 32%, var(--bg) 112%);
   }
 
+  @media (max-width: 767px){
+  /* Optimización mobile: fondo violeta oscuro estático y liso.
+     Se quitan por completo las nubes (.blob-layer) y los destellos (.halo).
+     Se conserva únicamente el punto que recorre las barras de pulso
+     (.tech-line::after, .stage-line::after) y el .scroll-cue. */
+  .blob-layer{ display:none !important; }
+  .halo{ display:none !important; }
+  .shimmer{ animation:none !important; background-position:0% 50% !important; }
+  .final-btn{ animation:none !important; }
+  .stage-chip{ animation:none !important; }
+}
+
   /* ---------- nav ---------- */
 
   .avatar-menu{ position:fixed; top:1.8rem; left:2.4rem; z-index:25; }
@@ -1036,27 +1048,26 @@
   let trackHeight = 3000;
 
   function buildBlobs(){
-    blobLayer.innerHTML = '';
-    const mobile = isMobileViewport();
-    trackHeight = Math.max(document.body.scrollHeight * 0.55, 2200);
-    blobLayer.style.height = trackHeight + 'px';
-    const count = mobile ? 9 : blobCount;
-    for(let i=0;i<count;i++){
-      const el = document.createElement('div');
-      el.className = 'blob';
-      const size = 160 + Math.random()*360;
-      el.style.width = size+'px';
-      el.style.height = size+'px';
-      el.style.left = (Math.random()*100)+'%';
-      el.style.top = (Math.random()*trackHeight)+'px';
-      el.style.background = `radial-gradient(circle at 35% 35%, ${palette[i%palette.length]}, transparent 70%)`;
-      el.style.opacity = (0.35 + Math.random()*0.45).toFixed(2);
-      if(!mobile){
-        el.style.animation = `${driftAnims[i%driftAnims.length]} ${10+Math.random()*10}s ease-in-out infinite`;
-      }
-      blobLayer.appendChild(el);
-    }
+  blobLayer.innerHTML = '';
+  const mobile = isMobileViewport();
+  if(mobile) return;
+  trackHeight = Math.max(document.body.scrollHeight * 0.55, 2200);
+  blobLayer.style.height = trackHeight + 'px';
+  const count = blobCount;
+  for(let i=0;i<count;i++){
+    const el = document.createElement('div');
+    el.className = 'blob';
+    const size = 160 + Math.random()*360;
+    el.style.width = size+'px';
+    el.style.height = size+'px';
+    el.style.left = (Math.random()*100)+'%';
+    el.style.top = (Math.random()*trackHeight)+'px';
+    el.style.background = `radial-gradient(circle at 35% 35%, ${palette[i%palette.length]}, transparent 70%)`;
+    el.style.opacity = (0.35 + Math.random()*0.45).toFixed(2);
+    el.style.animation = `${driftAnims[i%driftAnims.length]} ${10+Math.random()*10}s ease-in-out infinite`;
+    blobLayer.appendChild(el);
   }
+}
 
   buildBlobs();
   window.addEventListener('resize', () => { buildBlobs(); });
